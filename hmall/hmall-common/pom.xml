@@ -7,7 +7,6 @@
 		<artifactId>hmall</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.leopord</groupId>
 	<artifactId>hmall-common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hmall-common</name>
