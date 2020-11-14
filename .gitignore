@@ -8,7 +8,8 @@
 *.orig
 
 #maven ignore
-taget/
+target/
+/target/
 
 #eclipse ignore
 .settings/
