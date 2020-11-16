@@ -25,6 +25,9 @@
           <el-form-item style="width: 100%">
             <el-button type="primary" @click.native.prevent="login" style="width: 100%">登录</el-button>
           </el-form-item>
+          <el-form-item style="width: 100%">
+            <el-button type="primary" @click.native.prevent="register" style="width: 100%">注册</el-button>
+          </el-form-item>
         </el-form>
   </div>
 </template>
@@ -43,8 +46,29 @@ export default {
               username:this.username,
               password:this.password
           }
-          this.$axios.post('http://localhost:9527/user/login',params).then(res => {
-              console.log(res)
+          this.$axios({
+              url: "/user/login",
+              method: "post",
+              data: params,
+          }) .then(res => {
+              console.log(res);
+          }) .catch (error => {
+              console.log(error);
+          })
+      },
+      register() {
+        var params = {
+              username:this.username,
+              password:this.password
+          }
+          this.$axios({
+              url: "/user/register",
+              method: "post",
+              data: params,
+          }) .then(res => {
+              console.log(res);
+          }) .catch (error => {
+              console.log(error);
           })
       }
   }

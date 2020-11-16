@@ -6,7 +6,7 @@ import java.util.Date;
 public class Promotion implements Serializable {
     private Integer id;
 
-    private String promotionTitile;
+    private String promotionTitle;
 
     private Date startTime;
 
@@ -22,12 +22,12 @@ public class Promotion implements Serializable {
         this.id = id;
     }
 
-    public String getPromotionTitile() {
-        return promotionTitile;
+    public String getPromotionTitle() {
+        return promotionTitle;
     }
 
-    public void setPromotionTitile(String promotionTitile) {
-        this.promotionTitile = promotionTitile;
+    public void setPromotionTitle(String promotionTitle) {
+        this.promotionTitle = promotionTitle;
     }
 
     public Date getStartTime() {
@@ -53,7 +53,7 @@ public class Promotion implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", promotionTitile=").append(promotionTitile);
+        sb.append(", promotionTitle=").append(promotionTitle);
         sb.append(", startTime=").append(startTime);
         sb.append(", endTime=").append(endTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

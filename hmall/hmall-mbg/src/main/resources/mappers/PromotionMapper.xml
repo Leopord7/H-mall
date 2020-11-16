@@ -3,12 +3,12 @@
 <mapper namespace="com.leopord.hmall.dao.PromotionMapper">
   <resultMap id="BaseResultMap" type="com.leopord.hmall.entity.Promotion">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="promotion_titile" jdbcType="VARCHAR" property="promotionTitile" />
+    <result column="promotion_title" jdbcType="VARCHAR" property="promotionTitle" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, promotion_titile, start_time, end_time
+    id, promotion_title, start_time, end_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,9 +24,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into promotion (promotion_titile, start_time, end_time
+    insert into promotion (promotion_title, start_time, end_time
       )
-    values (#{promotionTitile,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+    values (#{promotionTitle,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.leopord.hmall.entity.Promotion">
@@ -35,8 +35,8 @@
     </selectKey>
     insert into promotion
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="promotionTitile != null">
-        promotion_titile,
+      <if test="promotionTitle != null">
+        promotion_title,
       </if>
       <if test="startTime != null">
         start_time,
@@ -46,8 +46,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="promotionTitile != null">
-        #{promotionTitile,jdbcType=VARCHAR},
+      <if test="promotionTitle != null">
+        #{promotionTitle,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
@@ -60,8 +60,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.leopord.hmall.entity.Promotion">
     update promotion
     <set>
-      <if test="promotionTitile != null">
-        promotion_titile = #{promotionTitile,jdbcType=VARCHAR},
+      <if test="promotionTitle != null">
+        promotion_title = #{promotionTitle,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -74,7 +74,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.leopord.hmall.entity.Promotion">
     update promotion
-    set promotion_titile = #{promotionTitile,jdbcType=VARCHAR},
+    set promotion_title = #{promotionTitle,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
