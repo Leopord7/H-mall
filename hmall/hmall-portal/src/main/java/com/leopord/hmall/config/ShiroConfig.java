@@ -1,8 +1,14 @@
 package com.leopord.hmall.config;
 
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
+import com.leopord.hmall.config.assist.MyRealm;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.Realm;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,55 +23,52 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    /**
-     * 路径过滤规则
-     * @return
-     */
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/");
-        // 拦截器
-        Map<String, String> map = new LinkedHashMap<>();
-        // 配置不会被拦截的链接 顺序判断
-        map.put("/login", "anon");
-        // 过滤链定义，从上向下顺序执行，一般将/**放在最为下边
-        // 进行身份认证后才能访问
-        // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
-        map.put("/**", "authc");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        return shiroFilterFactoryBean;
 
+        //配置拦截器链，注意顺序
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+        filterChainDefinitionMap.put("/user/logout", "logout");
+        filterChainDefinitionMap.put("/user/login", "anon");
+        filterChainDefinitionMap.put("/user/register", "anon");
+        filterChainDefinitionMap.put("/**", "user");
+
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        return shiroFilterFactoryBean;
     }
 
-    /**
-     * 自定义身份认证Realm（包含用户名密码校验，权限校验等）
-     * @return
-     */
     @Bean
-    public AuthRealm authRealm() {
-        return new AuthRealm();
+    public Realm realm() {
+        MyRealm realm = new MyRealm();
+        realm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return new MyRealm();
     }
 
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(authRealm());
+        securityManager.setRealm(realm());
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
-    /**
-     * 开启Shiro注解模式，可以在Controller中的方法上添加注解
-     * @param securityManager
-     * @return
-     */
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
+    public SessionManager sessionManager() {
+
+        DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
+        defaultWebSessionManager.setSessionIdUrlRewritingEnabled(true);
+//        defaultWebSessionManager.setSessionDAO(sessionDAO());
+        return defaultWebSessionManager;
     }
+
+    @Bean
+    public CredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        hashedCredentialsMatcher.setHashIterations(1);
+        return hashedCredentialsMatcher;
+    }
+
 }

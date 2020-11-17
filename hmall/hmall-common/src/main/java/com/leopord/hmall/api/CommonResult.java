@@ -1,6 +1,5 @@
 package com.leopord.hmall.api;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class CommonResult implements Serializable {
+public class CommonResult implements Serializable{
 
     private long code;
 
@@ -53,10 +52,14 @@ public class CommonResult implements Serializable {
     }
 
     public static CommonResult error(StatusCode code) {
-        return new CommonResult(code, null);
+        return new CommonResult(code.getCode(), code.getMessage(),null);
     }
 
     public static CommonResult error(StatusCode code, String message) {
-        return new CommonResult(code.getCode(), message, null);
+        return new CommonResult(code.getCode(), message,null);
+    }
+
+    public static CommonResult error(long code, String message) {
+        return new CommonResult(code, message, null);
     }
 }

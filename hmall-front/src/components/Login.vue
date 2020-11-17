@@ -28,6 +28,9 @@
           <el-form-item style="width: 100%">
             <el-button type="primary" @click.native.prevent="register" style="width: 100%">注册</el-button>
           </el-form-item>
+           <el-form-item style="width: 100%">
+            <el-button type="primary" @click.native.prevent="test" style="width: 100%">测试</el-button>
+          </el-form-item>
         </el-form>
   </div>
 </template>
@@ -36,8 +39,8 @@
 export default {
   data () {
     return {
-        username:'',
-        password:''
+        username: null,
+        password: null,
     };
   },
   methods:{
@@ -57,7 +60,7 @@ export default {
           })
       },
       register() {
-        var params = {
+          var params = {
               username:this.username,
               password:this.password
           }
@@ -65,6 +68,16 @@ export default {
               url: "/user/register",
               method: "post",
               data: params,
+          }) .then(res => {
+              console.log(res);
+          }) .catch (error => {
+              console.log(error);
+          })
+      },
+      test() {
+          this.$axios({
+              url: "/product/id",
+              method: "post",
           }) .then(res => {
               console.log(res);
           }) .catch (error => {
