@@ -1,5 +1,6 @@
 package com.leopord.hmall.config;
 
+import com.leopord.hmall.config.assist.MyAuthenticationFilter;
 import com.leopord.hmall.config.assist.MyRealm;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -12,6 +13,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,6 +37,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/user/register", "anon");
         filterChainDefinitionMap.put("/**", "user");
 
+        LinkedHashMap<String, Filter> filtersMap = new LinkedHashMap<>();
+        filtersMap.put("user",new MyAuthenticationFilter() );
+        shiroFilterFactoryBean.setFilters(filtersMap);
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -43,7 +49,7 @@ public class ShiroConfig {
     public Realm realm() {
         MyRealm realm = new MyRealm();
         realm.setCredentialsMatcher(hashedCredentialsMatcher());
-        return new MyRealm();
+        return realm;
     }
 
     @Bean
@@ -66,8 +72,9 @@ public class ShiroConfig {
     @Bean
     public CredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");
         hashedCredentialsMatcher.setHashIterations(1);
+        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
         return hashedCredentialsMatcher;
     }
 

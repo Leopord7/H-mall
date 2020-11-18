@@ -1,19 +1,20 @@
 package com.leopord.hmall.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Product implements Serializable {
     private Integer id;
 
     private String title;
 
-    private Double price;
+    private BigDecimal price;
 
     private Integer sales;
 
     private Integer promotionId;
 
-    private Double promotionPrice;
+    private BigDecimal promotionPrice;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,11 +34,11 @@ public class Product implements Serializable {
         this.title = title;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -57,11 +58,11 @@ public class Product implements Serializable {
         this.promotionId = promotionId;
     }
 
-    public Double getPromotionPrice() {
+    public BigDecimal getPromotionPrice() {
         return promotionPrice;
     }
 
-    public void setPromotionPrice(Double promotionPrice) {
+    public void setPromotionPrice(BigDecimal promotionPrice) {
         this.promotionPrice = promotionPrice;
     }
 
