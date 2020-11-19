@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
+import Index from '@/common/Index'
+import AllGoods from '@/components/AllGoods'
+import GoodDetail from '@/components/GoodDetail'
 
 Vue.use(Router)
 
@@ -9,8 +12,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'default',
-      component: Login,
+      component: Index,
+      name: 'index',
+      redirect: '/allGoods',
+      children: [
+        {
+          path: 'allGoods',
+          component: AllGoods,
+        },
+        {
+          path: 'goodDetail',
+          component: GoodDetail,
+        }
+      ]
     },
     {
       path: '/login',
