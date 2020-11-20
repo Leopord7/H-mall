@@ -21,6 +21,8 @@
 
 <style>
     .index {
+        display: flex;
         height: 100%;
+        flex-direction: column;
     }
 </style>

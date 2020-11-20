@@ -13,8 +13,9 @@ export default {
 
 <style>
     .footer {
-        height: 150px;
+        height: 10%;
         width: 100%;
+        flex-shrink: 0;
         background-color: #e6e6e6;
     }
 </style>

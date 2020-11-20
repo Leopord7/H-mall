@@ -20,7 +20,7 @@ export default {
 
 <style>
     .header {
-        height: 10%;
+        min-height: 10%;
         width: 100%;
         background-color: white;
         display: flex;

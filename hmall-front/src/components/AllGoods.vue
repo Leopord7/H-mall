@@ -7,7 +7,7 @@
                 mode="horizontal"
                 @select="handleSelect"
                 active-text-color="red"
-                style="margin-right: 700px;">
+                style="margin-right: 700px; bottom: -1px;">
                 <el-menu-item index="allGoods">全部商品</el-menu-item>
             </el-menu>
         </div>
@@ -25,7 +25,7 @@
                 
                 activeIndex: "allGoods",
 
-                goods: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                goods: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             }
         },
         methods: {
@@ -38,23 +38,22 @@
     
 <style>
     .allGoods {
-        
+       
+        flex: 1;
     }
     .nav {
         display: flex;
         justify-content: center;
         background-color: white;
-        width: 100%;
         height: 11%;
+        width: 100%;
     } 
     .goods_container {
         background: #ededed;
-        min-height: 89%;
-        width: 100%;
+        width: 100%;    
         display: flex;
         justify-content: center;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        height: 89%;
     }
     .goods {
         width: 70%;
@@ -69,9 +68,9 @@
         background-color: white;
         border: 1px solid #efefef;
     }
-    div.per_good:hover {
+    /* div.per_good:hover {
         transform: translateY(-3px);
         box-shadow: 1px 1px 20px #999;
         
-    }
+    } */
 </style>
