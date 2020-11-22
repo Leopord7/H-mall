@@ -28,9 +28,6 @@
           <el-form-item style="width: 100%">
             <el-button type="primary" @click.native.prevent="register" style="width: 100%">注册</el-button>
           </el-form-item>
-           <el-form-item style="width: 100%">
-            <el-button type="primary" @click.native.prevent="test" style="width: 100%">测试</el-button>
-          </el-form-item>
         </el-form>
   </div>
 </template>
@@ -54,7 +51,11 @@ export default {
               method: "post",
               data: params,
           }) .then(res => {
-              console.log(res);
+            if (res.data.code == 200) {
+              this.$router.push('/allGoods')
+            } else {
+              alert("错误！" + res.data.message)
+            }
           }) .catch (error => {
               console.log(error);
           })
@@ -69,21 +70,15 @@ export default {
               method: "post",
               data: params,
           }) .then(res => {
-              console.log(res);
+            if (res.data.code == 200) {
+              alert("注册成功！")
+            } else {
+              alert("错误！" + res.data.message)
+            }
           }) .catch (error => {
               console.log(error);
           })
       },
-      test() {
-          this.$axios({
-              url: "/product/id",
-              method: "post",
-          }) .then(res => {
-              console.log(res);
-          }) .catch (error => {
-              console.log(error);
-          })
-      }
   }
 }
 </script>
