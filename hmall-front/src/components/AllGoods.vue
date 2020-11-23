@@ -13,7 +13,26 @@
         </div>
         <div class="goods_container">
             <div class="goods">
-                <div v-for="(item, i) in goods" :key=i class="per_good">item</div>
+                <div v-for="(item, i) in goods.slice((currentPage - 1) * pageSize, currentPage * pageSize)" :key=i class="per_good">
+                    <div>
+                        {{ item.title }}
+                    </div>
+                    <div>
+                        {{ item.price }}
+                    </div>
+                    <div>
+                        <el-button type="primary" @click="goodDetail(i)">详情</el-button>
+                    </div>
+                </div>
+                <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[5, 10]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="goods.length">
+                </el-pagination>
             </div>
         </div>
     </div>
@@ -25,12 +44,38 @@
                 
                 activeIndex: "allGoods",
 
-                goods: [1,1,1,1,1,1,1,1,1],
+                goods: [],
+
+                pageSize: 5,
+                currentPage: 1,
             }
+        },
+        beforeCreate() {
+            let _this = this
+            this.$axios({
+                method: "get",
+                url: "/product/list",
+            }) .then(res => {
+                if (res.data.code != 200) {
+                    alert("错误！" + res.data.message)
+                } else {
+                    _this.goods = res.data.data
+                }
+            })
         },
         methods: {
             handleSelect(key, keyPath) {
             
+            },
+            goodDetail(id) {
+                let product = this.goods[(this.currentPage - 1) * this.pageSize + id]
+                this.$router.push({path: 'goodDetail/' + product.id})
+            },
+            handleSizeChange(pageSize) {
+                this.pageSize = pageSize
+            },
+            handleCurrentChange(currentPage) {
+                this.currentPage = currentPage
             }
         }
     }

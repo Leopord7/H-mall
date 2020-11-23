@@ -11,6 +11,8 @@ public interface ProductStockMapper {
 
     ProductStock selectByPrimaryKey(Integer id);
 
+    ProductStock selectByProductId(Integer id);
+
     int updateByPrimaryKeySelective(ProductStock record);
 
     int updateByPrimaryKey(ProductStock record);

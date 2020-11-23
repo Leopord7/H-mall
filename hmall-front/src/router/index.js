@@ -21,7 +21,7 @@ export default new Router({
           component: AllGoods,
         },
         {
-          path: 'goodDetail',
+          path: 'goodDetail/:id',
           component: GoodDetail,
         }
       ]

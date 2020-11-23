@@ -6,20 +6,28 @@
             </div>
             <div class="good_info">
                 <div class="title">
-                    <h4>{{ product.productName }}</h4>
+                    <h4>{{ title }}</h4>
                 </div>
                 <div class="price">
                     <span class="price_info">
-                        <em style="font-style: normal;">¥</em>333
+                        <em style="font-style: normal;">¥</em> {{ price }}
                     </span>
                 </div>
+                <div class="title" v-if="promotion">
+                    <h5>{{ promotionTitle }}</h5>
+                </div>
 
+                <div class="price" v-if="promotion">
+                    <span class="price_info">
+                        <em>¥</em> {{ promotionPrice }}
+                    </span>
+                </div>
                 <div class="num">
                     <el-input-number v-model="num" @change="handleNumChange" :min="1" :max="10" label="数量">                       
                     </el-input-number>
+                    <el-button type="primary" @click="buy">购买</el-button>
                 </div>
             </div>
-        </div>
         <!--产品信息-->
       </div>
 </template>
@@ -28,16 +36,47 @@
 export default {
     data() {
         return {
-            num: "",
-            product: {
-                productId: "",
-                productName: "十万个为什么",
-            },
+            id: "",
+            title: "",
+            price: "",
+            promotion: false,
+            promotionTitle: "",
+            promotionPrice: "",
+            sales: "",
+            stock: "",
 
+            num: "",
         }
+    },
+    beforeCreate() {
+        this.productId = this.$route.params.id;
+        let _this = this
+        this.$axios({
+            url: '/product/detail/' + _this.productId,
+            method: 'get',
+        }) .then(res => {
+            if (res.data.code != 200) {
+                alert("错误！" + res.data.message)
+            } else {
+                let data = res.data.data
+                _this.id = data.id
+                _this.title = data.title
+                _this.price = data.price
+                _this.promotion = (data.promotionStatus != 0)
+                _this.promotionTitle = data.promotionTitle
+                _this.promotionPrice = data.promotion_price
+                _this.sales = data.sales
+                _this.stock = data.stock
+            }
+        }) .catch(error => {
+            console.log(error)
+        })
     },
     methods: {
         handleNumChange() {
+
+        },
+        buy() {
 
         }
     }
