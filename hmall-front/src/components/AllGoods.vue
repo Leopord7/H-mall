@@ -25,7 +25,7 @@
                 
                 activeIndex: "allGoods",
 
-                goods: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                goods: [1,1,1,1,1,1,1,1,1],
             }
         },
         methods: {
@@ -54,6 +54,8 @@
         display: flex;
         justify-content: center;
         height: 89%;
+        padding-top: 5px;
+        padding-bottom: 10px;
     }
     .goods {
         width: 70%;
@@ -68,9 +70,9 @@
         background-color: white;
         border: 1px solid #efefef;
     }
-    /* div.per_good:hover {
+    div.per_good:hover {
         transform: translateY(-3px);
         box-shadow: 1px 1px 20px #999;
         
-    } */
+    }
 </style>
