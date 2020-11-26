@@ -19,17 +19,20 @@
 
                 <div class="price" v-if="promotion">
                     <span class="price_info">
-                        <em>¥</em> {{ promotionPrice }}
+                        当前秒杀价：<em>¥</em> <i>{{ promotionPrice }}</i>
                     </span>
                 </div>
-                <div class="num">
+                <div class="tool">
                     <el-input-number v-model="num" @change="handleNumChange" :min="1" :max="10" label="数量">                       
                     </el-input-number>
-                    <el-button type="primary" @click="buy">购买</el-button>
+                </div>
+                <div class="tool">
+                    <el-button type="primary" @click="buy" size="small">购买</el-button>
                 </div>
             </div>
         <!--产品信息-->
       </div>
+    </div>
 </template>
 
 <script>
@@ -64,7 +67,7 @@ export default {
                 _this.price = data.price
                 _this.promotion = (data.promotionStatus != 0)
                 _this.promotionTitle = data.promotionTitle
-                _this.promotionPrice = data.promotion_price
+                _this.promotionPrice = data.promotionPrice
                 _this.sales = data.sales
                 _this.stock = data.stock
             }
@@ -119,11 +122,13 @@ export default {
         width: 100%;
         height: 30%;
     }
-    .num {
+    .tool {
         width: 100%;
-        height: 30%;
+        height: 20%;
         display: flex;
         justify-content: center;
+        align-items: center;
+        /* flex-direction: column; */
     }
     .title {
         width: 100%;
