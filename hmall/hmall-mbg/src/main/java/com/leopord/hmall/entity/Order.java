@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 public class Order implements Serializable {
     private String id;
 
-    private Integer itemId;
+    private Integer productId;
 
     private String username;
 
@@ -26,12 +26,12 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public Integer getItemId() {
-        return itemId;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public String getUsername() {
@@ -73,7 +73,7 @@ public class Order implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", itemId=").append(itemId);
+        sb.append(", productId=").append(productId);
         sb.append(", username=").append(username);
         sb.append(", price=").append(price);
         sb.append(", amount=").append(amount);

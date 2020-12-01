@@ -8,9 +8,7 @@ import com.leopord.hmall.entity.Product;
 import com.leopord.hmall.entity.ProductStock;
 import com.leopord.hmall.entity.Promotion;
 import com.leopord.hmall.service.ProductService;
-import com.leopord.hmall.utils.LocalDateUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
+import com.leopord.hmall.util.LocalDateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +31,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
-        Subject subject = SecurityUtils.getSubject();
-        System.out.println(subject.getPrincipal().getClass());
-        System.out.println();
         return productMapper.getAllProducts();
     }
 
@@ -54,8 +49,8 @@ public class ProductServiceImpl implements ProductService {
         if (product.getPromotionId() != -1) {
             int mid = product.getPromotionId();
             Promotion promotion = promotionMapper.selectByPrimaryKey(mid);
-            LocalDateTime startTime = LocalDateUtils.dateToLocalDateTime(promotion.getStartTime());
-            LocalDateTime endTime = LocalDateUtils.dateToLocalDateTime(promotion.getEndTime());
+            LocalDateTime startTime = LocalDateUtil.dateToLocalDateTime(promotion.getStartTime());
+            LocalDateTime endTime = LocalDateUtil.dateToLocalDateTime(promotion.getEndTime());
             LocalDateTime now = LocalDateTime.now();
             if (now.isAfter(endTime)) {
                 //该活动已过期，标记活动位为-1

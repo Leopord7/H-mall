@@ -7,7 +7,11 @@ import lombok.Setter;
 public enum StatusCode implements BaseErrorInterface {
 
     SUCCESS(200, "操作成功"),
+
+    USER_NOT_EXISTED(301, "用户不存在"),
+
     VALIDATE_FAILED(401, "参数检验失败"),
+
     ERROR(500, "结果错误"),
     ;
 

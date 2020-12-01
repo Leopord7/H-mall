@@ -1,11 +1,11 @@
-package com.leopord.hmall.utils;
+package com.leopord.hmall.util;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-public final class LocalDateUtils {
+public final class LocalDateUtil {
 
     private static final ZoneId ZONE = ZoneId.systemDefault();
 

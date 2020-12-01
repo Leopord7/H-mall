@@ -13,6 +13,8 @@ public interface ProductStockMapper {
 
     ProductStock selectByProductId(Integer id);
 
+    int decreaseStock(Integer productId, Integer amount);
+
     int updateByPrimaryKeySelective(ProductStock record);
 
     int updateByPrimaryKey(ProductStock record);

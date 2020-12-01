@@ -38,7 +38,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.leopord.hmall.dao"
                              targetProject="hmall-mbg\src\main\java"/>
         <!--生成全部表tableName设为%-->
-        <table tableName="sequence" enableCountByExample="false"
+        <table tableName="order" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>

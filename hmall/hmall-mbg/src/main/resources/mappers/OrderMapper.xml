@@ -3,14 +3,14 @@
 <mapper namespace="com.leopord.hmall.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.leopord.hmall.entity.Order">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="amount" jdbcType="INTEGER" property="amount" />
     <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, item_id, username, price, amount, order_price
+    id, product_id, username, price, amount, order_price
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -26,9 +26,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order (item_id, username, price, 
+    insert into order (product_id, username, price, 
       amount, order_price)
-    values (#{itemId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+    values (#{productId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
       #{amount,jdbcType=INTEGER}, #{orderPrice,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.leopord.hmall.entity.Order">
@@ -37,8 +37,8 @@
     </selectKey>
     insert into order
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="itemId != null">
-        item_id,
+      <if test="productId != null">
+        product_id,
       </if>
       <if test="username != null">
         username,
@@ -54,8 +54,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="itemId != null">
-        #{itemId,jdbcType=INTEGER},
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -74,8 +74,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.leopord.hmall.entity.Order">
     update order
     <set>
-      <if test="itemId != null">
-        item_id = #{itemId,jdbcType=INTEGER},
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
@@ -94,7 +94,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.leopord.hmall.entity.Order">
     update order
-    set item_id = #{itemId,jdbcType=INTEGER},
+    set product_id = #{productId,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       amount = #{amount,jdbcType=INTEGER},
