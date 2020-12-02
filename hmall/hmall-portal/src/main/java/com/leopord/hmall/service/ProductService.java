@@ -10,4 +10,6 @@ public interface ProductService {
     List<Product> getAllProducts();
 
     ProductDetail getProductDetail(Integer id);
+
+    void increaseSale(Integer productId, Integer amount);
 }

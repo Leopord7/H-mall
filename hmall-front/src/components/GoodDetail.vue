@@ -48,7 +48,7 @@ export default {
             sales: "",
             stock: "",
 
-            num: "",
+            num: 1,
         }
     },
     beforeCreate() {
@@ -80,7 +80,20 @@ export default {
 
         },
         buy() {
-
+            var _this = this
+            var params = {
+                productId: this.id,
+                amount: this.num
+            }
+            this.$axios({
+                method: "get",
+                url: "/order/create",
+                data: params,
+            }) .then(res => {
+                console.log(res)
+            }) .catch(error => {
+                console.log(error)
+            })
         }
     }
 }

@@ -15,6 +15,8 @@ public interface ProductMapper {
 
     List<Product> getAllProducts();
 
+    int increaseSale(Integer productId, Integer amount);
+
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);

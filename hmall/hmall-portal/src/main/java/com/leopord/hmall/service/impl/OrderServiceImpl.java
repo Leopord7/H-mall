@@ -11,6 +11,7 @@ import com.leopord.hmall.exception.BusinessException;
 import com.leopord.hmall.service.OrderService;
 import com.leopord.hmall.service.ProductStockService;
 import com.leopord.hmall.service.UserService;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
     @Resource
@@ -37,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public Order creatOrder(String username, Integer productId, Integer amount) {
+    public void creatOrder(String username, Integer productId, Integer amount) {
         if (userService.getUserByName(username) == null) {
             throw new BusinessException(StatusCode.USER_NOT_EXISTED);
         }
@@ -63,8 +65,6 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderPrice(price.multiply(new BigDecimal(amount)));
 
         orderMapper.insertSelective(order);
-
-        return order;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)

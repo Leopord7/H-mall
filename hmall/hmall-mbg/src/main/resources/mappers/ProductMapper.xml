@@ -105,4 +105,9 @@
       promotion_price = #{promotionPrice,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="increaseSale">
+    update product
+    set sales = sales + #{amount, jdbcType=INTEGER}
+    where id = #{productId, jdbcType=INTEGER}
+  </update>
 </mapper>

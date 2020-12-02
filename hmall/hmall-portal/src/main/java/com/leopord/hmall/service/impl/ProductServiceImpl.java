@@ -35,6 +35,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void increaseSale(Integer productId, Integer amount) {
+        productMapper.increaseSale(productId, amount);
+    }
+
+    @Override
     public ProductDetail getProductDetail(Integer id) {
 
         ProductDetail productDetail = new ProductDetail();
